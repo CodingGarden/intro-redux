@@ -18,13 +18,16 @@
     * [ ] state
     * [ ] reducer
     * [ ] export reducer
+  * [ ] Render App with Provider wrapper and store
+  * [ ] Connect container to the store
+    * [ ] mapStateToProps
+    * [ ] Convert to use props instead of state
   * [ ] Convert change handlers to action types and reducers
     * [ ] action types
     * [ ] actions
-  * [ ] Connect container to the store
-    * [ ] mapStateToProps
+    * [ ] reducer
     * [ ] mapDispatchToProps
-  * [ ] Render App with Provider wrapper and store
+    * [ ] Convert method calls to dispatch calls
 * [ ] Convert a Simple Image Search React app to Redux (API calls)
   * [ ] Convert to redux...
   * [ ] Add an async action middleware

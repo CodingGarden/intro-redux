@@ -1,28 +1,28 @@
 # Intro to Redux with React
 
-* [ ] What is application state?
-* [ ] What is Redux?
+* [x] What is application state?
+* [x] What is Redux?
 * [ ] Redux Diagram/Flow
-  * [ ] Action Creators
-  * [ ] Actions
-  * [ ] Reducers
-  * [ ] Store
-  * [ ] Containers Components
+  * [x] Action Creators
+  * [x] Actions
+  * [x] Reducers
+  * [x] Store
+  * [x] Containers Components
     * [ ] connect
       * [ ] mapStateToProps
       * [ ] mapDispatchToProps
   * [ ] Presentational Components
 * [ ] Convert a Simple Todo React app to Redux
-  * [ ] yarn add redux react-redux redux-logger
+  * [x] yarn add redux react-redux redux-logger
   * [ ] Create a basic store
-    * [ ] state
-    * [ ] reducer
-    * [ ] export reducer
+    * [x] state
+    * [x] reducer
+    * [x] export reducer
   * [ ] Convert change handlers to action types and reducers
     * [ ] action types
     * [ ] actions
   * [ ] Connect container to the store
-    * [ ] mapStateToProps
+    * [x] mapStateToProps
     * [ ] mapDispatchToProps
   * [ ] Render App with Provider wrapper and store
 * [ ] Convert a Simple Image Search React app to Redux (API calls)

@@ -1,85 +1,47 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 
-class TodoApp extends Component {
-  constructor() {
-    super();
-    this.state = {
-      message: 'Hello Coding Garden!!',
-      newTodo: '',
-      todos: [{
-        title: 'Learn React',
-        done: false
-      }, {
-        title: 'Learn JSX',
-        done: false
-      }]
-    };
-  }
+import * as actions from '../store/actions';
 
+class TodoApp extends Component {
   newTodoChanged(event) {
-    this.setState({
-      newTodo: event.target.value
-    });
+    this.props.onNewTodoChanged(event.target.value);
   }
 
   formSubmitted(event) {
     event.preventDefault();
 
-    this.setState({
-      newTodo: '',
-      todos: [...this.state.todos, {
-        title: this.state.newTodo,
-        done: false
-      }]
+    this.props.onAddNewTodo({
+      title: this.props.newTodo,
+      done: false
     });
   }
 
   toggleTodoDone(event, index) {
-    const todos = [...this.state.todos]; // copy the array
-    todos[index] = {
-      ...todos[index],
-      done: event.target.checked // update done property on copied todo
-    }; // copy the todo can also use Object.assign
-    this.setState({
-      todos
-    });
+    this.props.onToggleTodoDone(index);
   }
 
   removeTodo(index) {
-    const todos = [...this.state.todos]; // copy the array
-    todos.splice(index, 1);
-
-    this.setState({
-      todos
-    });
+    this.props.onRemoveTodo(index);
   }
 
   allDone() {
-    const todos = this.state.todos.map(todo => {
-      return {
-        title: todo.title, // can also do ...todo
-        done: true
-      };
-    });
-
-    this.setState({
-      todos
-    });
+    this.props.onMarkAllDone();
   }
 
   render() {
     return (
       <div className="App">
-        <h3>{this.state.message}</h3>
+        <h3>{this.props.message}</h3>
         <NewTodoForm
-            newTodo={this.state.newTodo}
+            newTodo={this.props.newTodo}
             formSubmitted={this.formSubmitted.bind(this)}
             newTodoChanged={this.newTodoChanged.bind(this)} />
         <button onClick={() => this.allDone()}>All Done</button>
         <TodoList
-          todos={this.state.todos}
+          todos={this.props.todos}
           toggleTodoDone={this.toggleTodoDone.bind(this)}
           removeTodo={this.removeTodo.bind(this)}/>
       </div>
@@ -87,4 +49,32 @@ class TodoApp extends Component {
   }
 }
 
-export default TodoApp;
+function mapStateToProps(state) {
+  return {
+    message: state.message,
+    newTodo: state.newTodo,
+    todos: state.todos
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onNewTodoChanged: newTodo => {
+      dispatch(actions.newTodoChanged(newTodo));
+    },
+    onAddNewTodo: todo => {
+      dispatch(actions.addNewTodo(todo));
+    },
+    onRemoveTodo: index => {
+      dispatch(actions.removeTodo(index));
+    },
+    onToggleTodoDone: index => {
+      dispatch(actions.toggleTodoDone(index));
+    },
+    onMarkAllDone: () => {
+      dispatch(actions.markAllDone());
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
